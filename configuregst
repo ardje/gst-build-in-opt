@@ -1,7 +1,0 @@
-#!/bin/bash -x
-. ./set_env.sh
-mkdir -p $PFX
-cd gstreamer-$VER
-./configure \
---prefix=$PFX \
---enable-introspection=yes \
