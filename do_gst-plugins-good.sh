@@ -1,11 +1,10 @@
-#!/bin/bash -xe
+#!/bin/bash -x
 . ./set_env.sh
 mkdir -p $PFX
-cd orc
+cd gst-plugins-good
 git clean -x -d -f
-git checkout orc-0.4.26
+git checkout 1.9.90
 export CONFIGURE_EXT_OPT="--prefix=$PFX --enable-introspection=yes"
-NOCONFIGURE=true ./autogen.sh
-./configure $CONFIGURE_EXT_OPT
+./autogen.sh
 make
 make install
