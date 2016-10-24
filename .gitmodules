@@ -4,3 +4,6 @@
 [submodule "gst-plugins-base"]
 	path = gst-plugins-base
 	url = git://anongit.freedesktop.org/gstreamer/gst-plugins-base
+[submodule "orc"]
+	path = orc
+	url = git://anongit.freedesktop.org/gstreamer/orc
