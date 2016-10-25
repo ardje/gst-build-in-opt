@@ -3,4 +3,9 @@ APT=$(which aptitude) || APT=$(which apt-get)
 apt_install() {
 	sudo $APT install "$@"
 }
-apt_install autoreconf
+
+# generic
+apt_install autoconf libtool
+
+# gstreamer
+apt_install autopoint bison
