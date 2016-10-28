@@ -16,3 +16,6 @@
 [submodule "gst-plugins-ugly"]
 	path = gst-plugins-ugly
 	url = git://anongit.freedesktop.org/gstreamer/gst-plugins-ugly
+[submodule "x264"]
+	path = x264
+	url = http://git.videolan.org/git/x264.git
