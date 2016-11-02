@@ -21,13 +21,17 @@ showx() {
 	GSL v4l2src ! video/x-raw, framerate=25/1, width=1280, height=720 ! videoconvert ! ximagesink
 }
 rtp1() {
-	GSL -v v4l2src ! video/x-raw, format=$FORMAT,framerate=25/1, width=1280, height=720 ! videoconvert ! x264enc ! rtph264pay ! udpsink host=127.0.0.1 port=5000
+	GSLv v4l2src ! video/x-raw, format=$FORMAT,framerate=25/1, width=1280, height=720 ! videoconvert ! x264enc ! rtph264pay ! udpsink host=127.0.0.1 port=5000
 }
 rtp2() {
-	GSL -v v4l2src ! video/x-raw, format=I420,framerate=25/1, width=1280, height=720 ! videoconvert ! x264enc ! rtph264pay ! udpsink host=127.0.0.1 port=5000
+	# Works wit 1.8 but not with 1.9... The device doesn't report I420
+	GSL v4l2src ! video/x-raw, format=I420,framerate=25/1, width=1280, height=720 ! videoconvert ! x264enc ! rtph264pay ! udpsink host=127.0.0.1 port=5000
 }
 rtp() {
-	GSL v4l2src !  video/x-raw, format=$FORMAT,framerate=25/1,width=1280,height=720 ! videoconvert !  x264enc ! h264parse ! rtph264pay config-interval=10 !  udpsink host=$DMCAST port=$DPORT
+	GSL v4l2src !  video/x-raw, format=$FORMAT,framerate=25/1,width=1280,height=720 ! videoconvert !  x264enc ! h264parse ! rtph264pay config-interval=10 !  udpsink host=$DMCAST port=$DPORT auto-multicast=true
+}
+tsrtp() {
+	GSL v4l2src !  video/x-raw, format=$FORMAT,framerate=25/1,width=1280,height=720 ! videoconvert !  x264enc ! mpegtsmux ! rtpmp2tpay !  udpsink host=$DMCAST port=$DPORT auto-multicast=true
 }
 probe() {
 	gst-device-monitor-1.0 Video/Source
