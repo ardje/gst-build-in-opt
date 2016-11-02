@@ -1,6 +1,6 @@
 #!/bin/bash -x
 . ./set_env.sh
-CMD="$1"
+CMD="$1";shift
 
 export export GST_DEBUG_DUMP_DOT_DIR=$PWD/tmp/
 mkdir tmp
@@ -33,9 +33,13 @@ rtp() {
 tsrtp() {
 	GSL v4l2src !  video/x-raw, format=$FORMAT,framerate=25/1,width=1280,height=720 ! videoconvert !  x264enc ! mpegtsmux ! rtpmp2tpay !  udpsink host=$DMCAST port=$DPORT auto-multicast=true
 }
+# example for working tsrtp of mp4 encoded files
+tsrtpvlc() { 
+	cvlc --loop "$@" --sout '#rtp{mux=ts,caching=2000,dst='"${DMCAST}"',port='"${DPORT}"',sdp=sap://,name="meeh",dts-delay=1000}'
+}
 probe() {
 	gst-device-monitor-1.0 Video/Source
 }
 
 
-$CMD
+$CMD "$@"
