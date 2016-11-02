@@ -37,6 +37,10 @@ tsrtp() {
 tsrtpvlc() { 
 	cvlc --loop "$@" --sout '#rtp{mux=ts,caching=2000,dst='"${DMCAST}"',port='"${DPORT}"',sdp=sap://,name="meeh",dts-delay=1000}'
 }
+rtpplay() {
+	# Does not work with this build, works with standard gstreamer
+	GSL playbin uri=udp://${DMCAST}:${DPORT} video-sink=cluttersink flags=0x00000253
+}
 probe() {
 	gst-device-monitor-1.0 Video/Source
 }
