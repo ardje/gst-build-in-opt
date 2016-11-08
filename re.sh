@@ -18,7 +18,8 @@ FORMAT=YUY2
 # X264 formats: I420, YV12, Y42B, Y444, NV12, I420_10LE, I422_10LE, Y444_10LE
 
 if [ -e "examples/$CMD.sh" ]; then
-  . "examples/$CMD.sh" "$@"
+  . "examples/$CMD.sh"
+  $CMD "$@"
 else
   echo example not found
 fi
