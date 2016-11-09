@@ -12,6 +12,8 @@ GSL(){
 	gst-launch-1.0 -v "$@"
 }
 
+sudo taskset -p f0 $$
+
 # The AVIO has 2 formats:
 FORMAT=NV12
 FORMAT=YUY2
