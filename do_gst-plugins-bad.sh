@@ -3,7 +3,7 @@
 mkdir -p $PFX
 cd gst-plugins-bad
 git clean -x -d -f
-git checkout 1.9.90
+git checkout 1.10
 export CONFIGURE_EXT_OPT="--prefix=$PFX --enable-introspection=yes
 $( awk '/^[^#]/ { print $1 }' <<EOF
 # 
